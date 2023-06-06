@@ -8,7 +8,7 @@
   </PropertyGroup>
   <PropertyGroup>
     <TargetFramework>net35</TargetFramework>
-    <CitiesSkylinesBinaries>D:\Games\Cities Skylines\Cities_Data\Managed\</CitiesSkylinesBinaries>
+    <CitiesSkylinesBinaries>C:\Games\Cities Skylines\Cities_Data\Managed\</CitiesSkylinesBinaries>
     <AssemblySearchPaths>
       $(AssemblySearchPaths);
       $(CitiesSkylinesBinaries)
@@ -23,8 +23,8 @@
     <PackageReference Include="SkyTools.Patching" Version="2.1.0" />
     <PackageReference Include="GitVersionTask" Version="5.2.4" />
     <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.9.8" />
-    <PackageReference Include="Roslynator.Analyzers" Version="2.3.0" />
-    <PackageReference Include="Roslynator.CodeAnalysis.Analyzers" Version="1.0.0-beta" />
+    <PackageReference Include="Roslynator.Analyzers" Version="2.3.0"/>
+    <PackageReference Include="Roslynator.CodeAnalysis.Analyzers" Version="1.0.0-beta"/>
     <PackageReference Include="StyleCop.Analyzers.Unstable" Version="1.2.0.164" />
   </ItemGroup>
   <ItemGroup>
@@ -42,7 +42,7 @@
     </Reference>
   </ItemGroup>
   <PropertyGroup>
-    <SolutionDirectory>e:\Documents\Coding\C#\RealTimeOffline\</SolutionDirectory>
+    <SolutionDirectory>G:\WorkSpace\RealTimeOffline\</SolutionDirectory>
     <ReleaseDirectory>$(SolutionDirectory)Mod Release\</ReleaseDirectory>
     <TempZipPath>$(SolutionDirectory)Mod Release.zip</TempZipPath>
   </PropertyGroup>

@@ -18,9 +18,10 @@ namespace RealTime.Core
     /// <summary>The main class of the Real Time mod.</summary>
     public sealed class RealTimeMod : LoadingExtensionBase, IUserMod
     {
-        private const string NoWorkshopMessage = "Something went very wrong.";
+        private const long WorkshopId = 1420955187;
+        private const string NoWorkshopMessage = "Real Time can only run when subscribed to in Steam Workshop";
 
-        private readonly string modVersion = "Offline" + GitVersion.GetAssemblyVersion(typeof(RealTimeMod).Assembly);
+        private readonly string modVersion = GitVersion.GetAssemblyVersion(typeof(RealTimeMod).Assembly);
         private readonly string modPath = GetModPath();
 
         private ConfigurationProvider<RealTimeConfig> configProvider;
@@ -39,7 +40,7 @@ namespace RealTime.Core
 #endif
 
         /// <summary>Gets the name of this mod.</summary>
-        public string Name => "Real Time Offline";
+        public string Name => "Real Time";
 
         /// <summary>Gets the description string of this mod.</summary>
         public string Description => "Adjusts the time flow and the Cims behavior to make them more real. Version: " + modVersion;
@@ -177,9 +178,8 @@ namespace RealTime.Core
         private static string GetModPath()
         {
             var pluginInfo = PluginManager.instance.GetPluginsInfo()
-                .FirstOrDefault(pi => pi.name.Contains(WorkshopMods.RealTimeOffline.ToString()));
+                .FirstOrDefault(pi => pi.publishedFileID.AsUInt64 == WorkshopId);
 
-            DebugOutputPanel.AddMessage(PluginManager.MessageType.Message, $"Real Time Offline: Path to mod directory detected as:\n{pluginInfo?.modPath ?? "Null"}");
             return pluginInfo?.modPath;
         }
 

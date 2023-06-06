@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net48</TargetFramework>
+    <TargetFramework>net471</TargetFramework>
     <TestProjectType>UnitTest</TestProjectType>
     <AssemblyTitle>RealTimeTests</AssemblyTitle>
     <Company>dymanoid</Company>

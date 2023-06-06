@@ -1,4 +1,4 @@
-// <copyright file="TimeControlCompatibility.cs" company="dymanoid">
+﻿// <copyright file="TimeControlCompatibility.cs" company="dymanoid">
 // Copyright (c) dymanoid. All rights reserved.
 // </copyright>
 
@@ -9,7 +9,6 @@ namespace RealTime.Simulation
     using System.Linq;
     using System.Reflection;
     using ColossalFramework.Plugins;
-    using RealTime.Core;
     using SkyTools.Patching;
     using SkyTools.Tools;
 
@@ -22,14 +21,16 @@ namespace RealTime.Simulation
         private const string TimeOfDayPropertySetter = "set_TimeOfDay";
         private const string TimeWarpManagerType = "TimeWarpMod.SunManager";
         private const string UltimateEyecandyManagerType = "UltimateEyecandy.DayNightCycleManager";
+        private const ulong TimeWarpWorkshopId = 814698320ul;
+        private const ulong UltimateEyecandyWorkshopId = 672248733ul;
 
         /// <summary>Gets a collection of method patches that need to be applied to ensure this mod's compatibility
         /// with other time-changing mods.</summary>
         /// <returns>A collection of <see cref="IPatch"/> objects.</returns>
         public static IEnumerable<IPatch> GetCompatibilityPatches()
         {
-            var timeWarpType = GetManagerType(WorkshopMods.TimeWarpWorkshopId, TimeWarpManagerType);
-            var ultimateEyecandyType = GetManagerType(WorkshopMods.UltimateEyecandyWorkshopId, UltimateEyecandyManagerType);
+            var timeWarpType = GetManagerType(TimeWarpWorkshopId, TimeWarpManagerType);
+            var ultimateEyecandyType = GetManagerType(UltimateEyecandyWorkshopId, UltimateEyecandyManagerType);
 
             return GetPatches(timeWarpType).Concat(GetPatches(ultimateEyecandyType));
         }
@@ -37,7 +38,7 @@ namespace RealTime.Simulation
         private static Type GetManagerType(ulong modId, string typeName)
         {
             var mod = PluginManager.instance.GetPluginsInfo()
-                .FirstOrDefault(pi => pi.name.Contains(modId.ToString()));
+                .FirstOrDefault(pi => pi.publishedFileID.AsUInt64 == modId);
 
             if (mod?.isEnabled != true)
             {
@@ -53,7 +54,6 @@ namespace RealTime.Simulation
 
             try
             {
-                DebugOutputPanel.AddMessage(PluginManager.MessageType.Message, "Real Time Offline: Time compatibility enabled.");
                 return assembly.GetType(typeName);
             }
             catch (Exception ex)
